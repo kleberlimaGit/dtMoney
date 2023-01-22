@@ -3,7 +3,7 @@ export function SearchForm() {
   return (
     <form
       action=""
-      className="flex gap-4 max-w-3xl mx-auto md:px-0 px-6 mt-6"
+      className="flex gap-4 max-w-3xl mx-auto md:px-0 px-6 mt-6 justify-center"
     >
       <input
         type="text"
@@ -13,7 +13,7 @@ export function SearchForm() {
       />
       <button
         type="submit"
-        className="flex gap-3 items-center px-5 b-zinc-900 border
+        className="flex gap-3 items-center px-5 py-4 b-zinc-900 border
        border-green-700 rounded-md text-green-700 hover:bg-green-700 
        hover:text-white hover:duration-200 font-bold"
       >

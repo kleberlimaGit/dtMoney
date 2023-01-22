@@ -1,4 +1,6 @@
+import * as Dialog from "@radix-ui/react-dialog";
 import Logo from "../../assets/logo.svg";
+import { NewTransactionModal } from "../NewTransactionModal";
 
 export function Header() {
   return (
@@ -8,9 +10,12 @@ export function Header() {
           <img src={Logo} alt="" />
           <span>DT Money</span>
         </div>
-        <button className="bg-emerald-600 px-4 py-2 rounded hover:bg-emerald-800 hover:duration-200">
-          Nova transação
-        </button>
+        <Dialog.Root>
+          <Dialog.Trigger className="bg-emerald-600 px-4 py-2 rounded hover:bg-emerald-800 hover:duration-200">
+            Nova transação
+          </Dialog.Trigger>
+          <NewTransactionModal/>
+        </Dialog.Root>
       </div>
     </header>
   );

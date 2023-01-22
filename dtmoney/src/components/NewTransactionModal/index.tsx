@@ -1,0 +1,63 @@
+import * as Dialog from "@radix-ui/react-dialog";
+import * as RadioGroup from '@radix-ui/react-radio-group';
+import { ArrowCircleDown, ArrowCircleUp, X } from "phosphor-react";
+
+export function NewTransactionModal() {
+  return (
+    <Dialog.Portal>
+      {/*faz com que um conteudo que possa ir para um ooutro lugar da aplicacao */}
+      <Dialog.Overlay className="fixed w-screen h-screen inset-0 bg-black opacity-75" />
+      <Dialog.Content className=" md:w-128 w-96 min-w-min rounded-md py-10 px-12 bg-neutral-800 fixed md:top-2/4 left-2/4 -bottom-56 md:bottom-0
+      -translate-x-2/4 -translate-y-2/4">
+        <Dialog.Title className="mb-6">Nova Transação</Dialog.Title>
+        <Dialog.Close className="absolute top-6 right-6">
+          <X size={20} weight="fill" />
+        </Dialog.Close>
+        <form action="" className="flex flex-col gap-4">
+          <input
+            type="text"
+            placeholder="Descrição"
+            required
+            autoFocus
+            className="rounded-md focus:border-green-700 focus:border outline-none
+           bg-zinc-900 text-neutral-500 py-3 px-4"
+          />
+          <input
+            type="number"
+            placeholder="Preço"
+            required
+            className="rounded-md focus:border-green-700 focus:border outline-none
+           bg-zinc-900 text-neutral-500 py-3 px-4"
+          />
+          <input
+            type="text"
+            placeholder="Categoria"
+            required
+            className="rounded-md focus:border-green-700 focus:border outline-none
+           bg-zinc-900 text-neutral-500 py-3 px-4 "
+          />
+          <RadioGroup.Root className="grid grid-cols-2 gap-4 mt-2">
+            
+            <RadioGroup.Item className="bg-neutral-700 flex items-center justify-center gap-2 rounded-md text-green-600
+             hover:text-neutral-300 hover:bg-green-600 hover:duration-200 p-4 font-bold income" value="income">
+              <ArrowCircleUp  size={20} />
+              Entrada
+            </RadioGroup.Item >
+
+            <RadioGroup.Item  className="bg-neutral-700 hover:bg-red-500 hover:duration-200 flex items-center
+             justify-center gap-2 rounded-md text-red-500 hover:text-neutral-300 p-4 font-bold outcome" value="outcome">
+              <ArrowCircleDown size={20} />
+              Saida
+            </RadioGroup.Item >
+          </RadioGroup.Root>
+          <button
+            type="submit"
+            className="w-full bg-emerald-600 hover:bg-emerald-800 hover:duration-200 rounded py-3 font-bold"
+          >
+            Cadastrar
+          </button>
+        </form>
+      </Dialog.Content>
+    </Dialog.Portal>
+  );
+}
