@@ -1,20 +1,36 @@
 {
   "transactions": [
     {
-      "id": "1",
+      "id": 1,
       "description": "Analista de Sistemas Banco BMG",
       "type": "income",
-      "category":"Trabalho",
+      "category": "Trabalho",
       "price": 9058,
       "createdAt": "2023-01-22T03:04:59.312Z"
     },
     {
-      "id": "2",
+      "id": 2,
       "description": "Pagamento da energia Coelba",
       "type": "outcome",
-      "category":"Luz",
+      "category": "Luz",
       "price": 282,
       "createdAt": "2023-01-22T03:04:59.312Z"
+    },
+    {
+      "description": "PMBA",
+      "category": "Trabalho",
+      "price": 3500,
+      "type": "income",
+      "createdAt": "2023-01-23T14:03:53.367Z",
+      "id": 3
+    },
+    {
+      "description": "Cartão de Crédito",
+      "price": 1500,
+      "category": "Cartão",
+      "type": "outcome",
+      "createdAt": "2023-01-23T17:36:44.652Z",
+      "id": 6
     }
   ]
 }
