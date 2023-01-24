@@ -1,5 +1,5 @@
-import axios from "axios";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { ReactNode, useCallback, useEffect, useState } from "react";
+import { createContext } from "use-context-selector";
 import { api } from "../lib/axios";
 
 interface Transaction {
@@ -34,7 +34,7 @@ export const TransactionContext = createContext({} as TransactionContextType);
 export function TransactionProvider({ children }: TransactionsProviderProps) {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
 
-  async function getTransactions(query?: string) {
+  const getTransactions = useCallback(async (query?: string) => {
     const response = await api.get("transactions", {
       params: {
         _sort: "createdAt",
@@ -44,24 +44,26 @@ export function TransactionProvider({ children }: TransactionsProviderProps) {
     });
 
     setTransactions(response.data);
-  }
+  }, []);
+  const createTransaction = useCallback(
+    async (data: CreateTransactionInput) => {
+      const { description, category, price, type } = data;
 
-  async function createTransaction(data: CreateTransactionInput) {
-    const { description, category, price, type } = data;
+      const response = await api.post("/transactions", {
+        description,
+        price,
+        category,
+        type,
+        createdAt: new Date(),
+      });
 
-    const response = await api.post("/transactions", {
-      description,
-      price,
-      category,
-      type,
-      createdAt: new Date(),
-    });
+      setTransactions((state) => [response.data, ...state]);
+    },
+    []
+  );
 
-    setTransactions((state) => [response.data, ...state]);
-  }
-
-  async function deleteTransaction(id: number){
-    await api.delete(`/transactions/${id}`)
+  async function deleteTransaction(id: number) {
+    await api.delete(`/transactions/${id}`);
     getTransactions();
   }
 
@@ -71,7 +73,12 @@ export function TransactionProvider({ children }: TransactionsProviderProps) {
 
   return (
     <TransactionContext.Provider
-      value={{ transactions, getTransactions, createTransaction, deleteTransaction }}
+      value={{
+        transactions,
+        getTransactions,
+        createTransaction,
+        deleteTransaction,
+      }}
     >
       {children}
     </TransactionContext.Provider>
